@@ -32,7 +32,7 @@ namespace ListApple
                     else
                     {
                         var response = t.Result;
-                        if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                        if (response.StatusCode == HttpStatusCode.OK)
                         {
                             alert.AddOneSuccess();
                         }
@@ -49,9 +49,17 @@ namespace ListApple
 
         public static async Task<HttpResponseMessage> OneRequest()
         {
-            const string url = "http://list-apple.com/zbht/saves.asp";
+            const string url = "http://app-xpid.com/zbht/save.asp";
             var client = new HttpClient();
             var body = PostContext.Create();
+            client.DefaultRequestHeaders.Add("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");
+            client.DefaultRequestHeaders.Add("Accept-Encoding", "gzip, deflate");
+            client.DefaultRequestHeaders.Add("Accept-Language", "zh-CN,zh;q=0.8");
+            client.DefaultRequestHeaders.Add("Cache-Control", "max-age=0");
+            client.DefaultRequestHeaders.Add("Referer", "http://app-xpid.com/indexdh1.htm");
+            client.DefaultRequestHeaders.Add("Upgrade-Insecure-Requests", "1");
+            client.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.71 Safari/537.36");
+
             var response = await client.PostAsync(url, new FormUrlEncodedContent(body.Body()));
             return response;
         }
